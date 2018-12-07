@@ -83,12 +83,6 @@ class Node(object):
         return OrderedDict([(name, val) for name, val in self.attrs.iteritems() if val.node_type == NodeType.Out])
 
 
-class ChainNode(Node):
-    def __init__(self, name=None):
-        super(ChainNode, self).__init__(name)
-        self.next_node = None
-
-
 class _CountedObject(object):
     counter = itertools.count()
 
@@ -125,7 +119,7 @@ def class_wrapper(cls):
 
 @class_wrapper
 class BinaryOperator(Node):
-    a = InAttrKls()
+    a = chain.In()
     b = InAttrKls()
     result = OutAttrKls()
 
